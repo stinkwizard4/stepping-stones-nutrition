@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ title }}{% if title %} | {% endif %}{{ site.name }}</title>
   {% if description %}<meta name="description" content="{{ description }}">{% endif %}
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ title or site.name }}">
+  <meta property="og:description" content="{{ description or site.tagline }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}/images/brand/logo.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ title or site.name }}">
+  <meta name="twitter:description" content="{{ description or site.tagline }}">
+  <meta name="twitter:image" content="{{ site.url }}/images/brand/logo.jpg">
+
   <link rel="icon" href="/images/brand/favicon.jpg">
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -13,18 +27,17 @@
 
   <header class="site-header">
     <a class="logo" href="/">
-      <img src="/images/brand/logo.jpg" alt="{{ site.name }}">
+      <img src="/images/brand/logo.jpg" alt="{{ site.name }}" width="600" height="216">
     </a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
       <span>Menu</span>
     </button>
     <nav id="primary-nav" class="primary-nav">
       <ul>
         {% for item in site.nav %}
-          {% if item.text == "Home" %}
-          <li><a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.text }}</a></li>
+          {% if item.servicesDropdown %}
           <li class="has-dropdown">
-            <button class="dropdown-toggle" aria-expanded="false">Services</button>
+            <button class="dropdown-toggle{% if page.url and '/services/' in page.url %} active{% endif %}" type="button" aria-expanded="false">{{ item.text }}</button>
             <ul class="dropdown">
               {% for service in services %}
               <li><a href="/services/{{ service.slug }}/">{{ service.navTitle or service.h1 }}</a></li>

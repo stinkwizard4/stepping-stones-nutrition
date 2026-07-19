@@ -1,3 +1,9 @@
+/* NOTE: This site deploys to a GitHub Pages subpath (/stepping-stones-nutrition/).
+   The Eleventy HTML base plugin rewrites URLs in HTML, but NOT inside this CSS
+   file. If you add a background-image, do NOT use a root-absolute path like
+   url("/images/foo.jpg") — it will 404 on the live site. Use a path relative to
+   this file instead, e.g. url("../images/foo.jpg"). */
+
 :root {
   --navy: #1d3a5f;
   --navy-dark: #142942;
@@ -48,7 +54,7 @@ a:hover { color: var(--sage); }
   padding: 1.25rem 1.5rem 0.75rem;
 }
 
-.logo img { height: 64px; display: block; }
+.logo img { height: 64px; width: auto; display: block; }
 
 .nav-toggle {
   display: none;
@@ -76,7 +82,8 @@ a:hover { color: var(--sage); }
   color: var(--navy);
   padding: 0.25rem 0;
 }
-.primary-nav a[aria-current="page"] {
+.primary-nav a[aria-current="page"],
+.dropdown-toggle.active {
   border-bottom: 2px solid var(--sage);
 }
 

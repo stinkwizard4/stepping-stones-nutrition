@@ -4,6 +4,7 @@ pagination:
   data: services
   size: 1
   alias: svc
+  addAllPagesToCollections: true
 permalink: "/services/{{ svc.slug }}/"
 eleventyComputed:
   title: "{{ svc.metaTitle }}"
@@ -15,7 +16,7 @@ eleventyComputed:
 </div>
 
 {% if svc.heroImage %}
-<img src="{{ svc.heroImage }}" alt="{{ svc.heroAlt }}" style="max-width:100%; border-radius:10px; margin-bottom:2rem;">
+<img src="{{ svc.heroImage }}" alt="{{ svc.heroAlt }}" width="1149" height="1369" style="max-width:100%; height:auto; border-radius:10px; margin-bottom:2rem;">
 {% else %}
 <div class="hero-image-placeholder" title="Placeholder for: {{ svc.heroAlt }}"></div>
 {% endif %}

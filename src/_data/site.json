@@ -1,6 +1,7 @@
 {
   "name": "Stepping Stones Nutrition",
   "tagline": "Registered Dietitian Nutritionists in Cary, NC",
+  "url": "https://stinkwizard4.github.io/stepping-stones-nutrition",
   "phone": "919-937-2031",
   "phoneHref": "9199372031",
   "fax": "919-234-5270",
@@ -14,6 +15,7 @@
   "banner": "IN-PERSON & VIRTUAL APPTS. NOW AVAILABLE",
   "nav": [
     { "text": "Home", "url": "/" },
+    { "text": "Services", "servicesDropdown": true },
     { "text": "About Us", "url": "/about-us/" },
     { "text": "Contact Us", "url": "/contact-us/" },
     { "text": "Location", "url": "/location/" },
