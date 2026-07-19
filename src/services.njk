@@ -1,0 +1,53 @@
+---
+layout: base.njk
+pagination:
+  data: services
+  size: 1
+  alias: svc
+permalink: "/services/{{ svc.slug }}/"
+eleventyComputed:
+  title: "{{ svc.metaTitle }}"
+  description: "{{ svc.intro }}"
+---
+<div class="hero">
+  <h1>{{ svc.h1 }}</h1>
+  <p class="subtitle">{{ svc.subtitle }}</p>
+</div>
+
+{% if svc.heroImage %}
+<img src="{{ svc.heroImage }}" alt="{{ svc.heroAlt }}" style="max-width:100%; border-radius:10px; margin-bottom:2rem;">
+{% else %}
+<div class="hero-image-placeholder" title="Placeholder for: {{ svc.heroAlt }}"></div>
+{% endif %}
+
+<section class="block">
+  <p>{{ svc.intro }}</p>
+</section>
+
+{% for section in svc.sections %}
+<section class="block">
+  <h2>{{ section.heading }}</h2>
+  {% if section.type == "paragraph" %}
+    <p>{{ section.text }}</p>
+  {% else %}
+    {% if section.intro %}<p>{{ section.intro }}</p>{% endif %}
+    <ul>
+      {% for item in section.items %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+    {% if section.note %}<p>{{ section.note }}</p>{% endif %}
+  {% endif %}
+</section>
+{% endfor %}
+
+<section class="block">
+  <h2>Serving Cary and Surrounding Areas &amp; Beyond</h2>
+  <p>We support clients and families in {{ site.servingAreas }}. We offer in-person and telehealth appointments.</p>
+</section>
+
+<div class="cta">
+  <h2>Ready to Begin?</h2>
+  <p>{{ svc.closing }}</p>
+  <p class="phone-line"><a href="tel:{{ site.phoneHref }}">{{ site.phone }}</a></p>
+</div>

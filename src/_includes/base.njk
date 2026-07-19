@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}{% if title %} | {% endif %}{{ site.name }}</title>
+  {% if description %}<meta name="description" content="{{ description }}">{% endif %}
+  <link rel="icon" href="/images/brand/favicon.jpg">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="banner">{{ site.banner }} &middot; <a href="tel:{{ site.phoneHref }}">{{ site.phone }}</a></div>
+
+  <header class="site-header">
+    <a class="logo" href="/">
+      <img src="/images/brand/logo.jpg" alt="{{ site.name }}">
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">
+      <span>Menu</span>
+    </button>
+    <nav id="primary-nav" class="primary-nav">
+      <ul>
+        {% for item in site.nav %}
+          {% if item.text == "Home" %}
+          <li><a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.text }}</a></li>
+          <li class="has-dropdown">
+            <button class="dropdown-toggle" aria-expanded="false">Services</button>
+            <ul class="dropdown">
+              {% for service in services %}
+              <li><a href="/services/{{ service.slug }}/">{{ service.navTitle or service.h1 }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% else %}
+          <li><a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.text }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-name">{{ site.name }} &mdash; Registered Dietitian Nutritionists providing evidence-based, weight-inclusive care.</p>
+    <p>Located in Cary, North Carolina.</p>
+    <p>Serving {{ site.servingAreas }}.</p>
+    <p>
+      Phone: <a href="tel:{{ site.phoneHref }}">{{ site.phone }}</a>
+      &nbsp;|&nbsp; Fax: {{ site.fax }}
+      &nbsp;|&nbsp; Email: <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+    </p>
+    <p class="footer-copyright">&copy; {{ year }} {{ site.name }}. All rights reserved.</p>
+  </footer>
+
+  <script src="/js/nav.js"></script>
+</body>
+</html>

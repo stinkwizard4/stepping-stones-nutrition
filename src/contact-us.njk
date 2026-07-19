@@ -1,0 +1,38 @@
+---
+layout: base.njk
+title: "Contact Us"
+description: "Contact Stepping Stones Nutrition in Cary, NC to schedule an appointment or ask a question."
+permalink: /contact-us/
+---
+<div class="hero">
+  <h1>Contact Us</h1>
+</div>
+
+<section class="block">
+  <h4>Send Us a Message</h4>
+  <div class="contact-block">
+    <p><strong>Name</strong></p>
+    <p><strong>Email</strong></p>
+    <p><strong>Message</strong></p>
+    <p><em>Contact form &mdash; wire this up to your form backend (e.g. the same Google Form / Apps Script pattern used elsewhere) once you're ready to collect submissions.</em></p>
+    <p style="font-size: 0.85rem; color: var(--text-muted);">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
+  </div>
+</section>
+
+<section class="block">
+  <h4>Now accepting new patients for in-person &amp; telehealth appointments.</h4>
+  <p>If you aren't sure if nutrition therapy is right for you, please call us to find out more. At the very least, we can help point you in the right direction.</p>
+  <p>Contact us if you have any questions and to schedule an appointment.</p>
+</section>
+
+<div class="contact-block">
+  <h4>{{ site.name }}</h4>
+  <p>{{ site.address.line1 }}<br>{{ site.address.line2 }}</p>
+  <p>Email: <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+  <p>Phone: <a href="tel:{{ site.phoneHref }}">{{ site.phone }}</a></p>
+</div>
+
+<div class="cta">
+  <h2>{{ site.apptCta.heading }}</h2>
+  <p>{{ site.apptCta.text }}</p>
+</div>

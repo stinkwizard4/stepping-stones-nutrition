@@ -1,0 +1,44 @@
+---
+layout: base.njk
+title: "New Patient Information"
+description: "What to expect for your first appointment at Stepping Stones Nutrition, including forms, insurance, and payment information."
+permalink: /new-patient-information/
+---
+<div class="hero">
+  <h1>Welcome to Stepping Stones Nutrition</h1>
+  <p class="subtitle">This page covers what you need to prepare for your first appointment, including required patient forms, insurance and payment information, and how to contact our team with questions.</p>
+</div>
+
+<section class="block">
+  <h2>New Patient Forms</h2>
+  <p>All new patient forms are sent automatically through our secure patient portal once your appointment is scheduled. We ask that all forms be completed at least 24 hours prior to your appointment. If you have questions or need assistance, please call us at {{ site.phone }}, or email us at: <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+</section>
+
+<section class="block">
+  <h2>Insurance &amp; Payment Information</h2>
+  <h3>In-Network Insurance</h3>
+  <p>We are in network with:</p>
+  <ul>
+    <li>Aetna (including Aetna CVS; except Duke Basic/Select)</li>
+    <li>NC State Health Plan</li>
+    <li>Blue Cross Blue Shield "BCBS" (except Blue Local)</li>
+    <li>UnitedHealthcare (UHC), UMR, Surest, and other UHC affiliates</li>
+  </ul>
+  <p>For insurance plans with whom we are in network, we will submit claims on your behalf after your appointment. Please see the link to the right to find out if we are in network with your insurance plan and if your plan covers nutrition services, and if so, the details of your coverage.</p>
+
+  <h3>Self-Pay</h3>
+  <p>For self-pay clients, we can provide a superbill to submit to your insurance company for possible reimbursement. Payment is due at the time of service. If you submit a superbill, reimbursement will be sent directly to you from your insurance company.</p>
+
+  <h4>Is Nutrition Covered?</h4>
+  <p>Find out if we are in network with your insurance and if nutrition services are covered. <a href="/insurance/">See our Insurance page &rarr;</a></p>
+</section>
+
+<section class="block">
+  <h2>For Healthcare Providers</h2>
+  <p>If you are a healthcare provider referring a patient, please contact us at {{ site.phone }}, or via email: <a href="mailto:{{ site.email }}">{{ site.email }}</a>. This ensures we can coordinate care and schedule appropriately.</p>
+</section>
+
+<div class="cta">
+  <h2>{{ site.apptCta.heading }}</h2>
+  <p>{{ site.apptCta.text }}</p>
+</div>

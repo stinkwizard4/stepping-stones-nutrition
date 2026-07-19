@@ -1,0 +1,28 @@
+{
+  "name": "Stepping Stones Nutrition",
+  "tagline": "Registered Dietitian Nutritionists in Cary, NC",
+  "phone": "919-937-2031",
+  "phoneHref": "9199372031",
+  "fax": "919-234-5270",
+  "faxHref": "9192345270",
+  "email": "info@stepping-stonesnutrition.com",
+  "address": {
+    "line1": "511 Keisler Drive, Suite 203",
+    "line2": "Cary, North Carolina 27518, United States"
+  },
+  "servingAreas": "Cary, Apex, Morrisville, Raleigh, Fuquay-Varina, Garner, Holly Springs, and beyond (AZ, CA, CO, MI, VA)",
+  "banner": "IN-PERSON & VIRTUAL APPTS. NOW AVAILABLE",
+  "nav": [
+    { "text": "Home", "url": "/" },
+    { "text": "About Us", "url": "/about-us/" },
+    { "text": "Contact Us", "url": "/contact-us/" },
+    { "text": "Location", "url": "/location/" },
+    { "text": "New Patient Information", "url": "/new-patient-information/" },
+    { "text": "Insurance", "url": "/insurance/" },
+    { "text": "Good Faith Estimate", "url": "/good-faith-estimate/" }
+  ],
+  "apptCta": {
+    "heading": "New & Existing Patient Appointments",
+    "text": "Click below to schedule a new or existing patient appointment. If you do not see a provider and/or a preferred time available, please call us, or email us. We will contact you as soon as possible."
+  }
+}
