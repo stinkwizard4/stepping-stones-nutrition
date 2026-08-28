@@ -104,6 +104,7 @@ You can read these, but you shouldn't need to change them for content updates.
 | `src/js/nav.js` | Makes the mobile "Menu" button and Services dropdown open and close. |
 | `.eleventy.js` | Eleventy's configuration — where the source lives, where the finished site goes, and the web address prefix. See the note about custom domains under [How publishing works](#how-publishing-works). |
 | `.github/workflows/deploy.yml` | The automatic publishing instructions. This is the file that makes merging to `main` go live. |
+| `.github/workflows/pr-build-check.yml` | The safety net. Test-builds every pull request so a mistake shows up as a red X *before* you merge. Never publishes anything. |
 | `package.json` / `package-lock.json` | Record which version of Eleventy the site uses, so builds are consistent. |
 | `.gitignore` | Tells Git which files not to store — the `node_modules/` folder and the built `_site/` folder. |
 
@@ -358,6 +359,8 @@ You edit a file
         ↓
 You commit the change on a branch and open a pull request
         ↓
+GitHub test-builds the change and shows a green check or a red X   ← automatic, ~1 minute
+        ↓
 You review the change and click "Merge pull request"
         ↓
 GitHub Actions rebuilds the site and publishes it   ← automatic, ~1–3 minutes
@@ -382,19 +385,40 @@ gives you a chance to re-read the change before the public sees it, and it gives
 a clean record of what changed and when — with a one-click **Revert** if you change
 your mind.
 
-One caveat to be aware of: **right now, nothing checks your change before you merge
-it.** The build only runs *after* the merge. So if a JSON file has a typo, you'll
-find out from a red X in the Actions tab rather than from a warning on the pull
-request. The live site stays safely on its last working version either way, but the
-fix has to be a follow-up change. (A developer could add a build check that runs on
-pull requests — a small edit to `.github/workflows/deploy.yml` — if you'd like the
-earlier warning.)
+### The build check on pull requests
+
+Every pull request aimed at `main` is automatically test-built before you can merge
+it. This is a safety net for exactly the kind of mistake that's easiest to make — a
+missing comma in `services.json`.
+
+You'll see the result near the bottom of the pull request page, above the Merge
+button:
+
+- **Green check — "All checks have passed."** The site built cleanly. Safe to merge.
+- **Yellow dot** — still building. Takes about a minute. Wait for it to settle.
+- **Red X — "Some checks were not successful."** Something in your change stops the
+  site from building. **Don't merge.** Click **Details** next to the failed check to
+  see the error, then push a fix to the same branch — the check re-runs
+  automatically on each new commit.
+
+The check only *builds* the site to prove it works; it never publishes anything. It
+also can't judge your writing — a green check means "this will build," not "this
+reads well," so still re-read your own wording.
+
+GitHub won't physically block you from merging a red pull request unless branch
+protection is switched on. If you'd like the Merge button actually disabled until
+the check passes, that's a repository setting: **Settings → Branches → Add branch
+ruleset**, requiring the "Build check" status check on `main`. Worth doing if anyone
+other than you will be merging.
 
 ### Watching a deploy and confirming it worked
 
-Click the **Actions** tab at the top of the repository. You'll see a run named
-"Deploy to GitHub Pages" for your merge. A yellow dot means it's building, a green
-check means it published, a red X means it failed. When it's green, refresh the
+Click the **Actions** tab at the top of the repository. You'll see two kinds of runs
+listed there: **"Build check"** runs, which happen while a pull request is open and
+only test that the site builds, and **"Deploy to GitHub Pages"** runs, which happen
+after a merge and are the ones that actually publish. For confirming something went
+live, look for the "Deploy to GitHub Pages" run for your merge. A yellow dot means
+it's building, a green check means it published, a red X means it failed. When it's green, refresh the
 live site — you may need a hard refresh (Ctrl+Shift+R, or Cmd+Shift+R on a Mac) to
 get past your browser's cache.
 
@@ -419,8 +443,9 @@ domain make these two edits at the same time.
 ## Editing safely: rules of thumb
 
 **The JSON files (`site.json`, `services.json`) are picky about punctuation.** A
-missing comma or quote mark will fail the build — the site stays up on its last good
-version, but your change won't publish until it's fixed. The three rules:
+missing comma or quote mark will fail the build. The pull request build check will
+catch this and show you a red X before you merge, and the live site is never at risk
+either way — but it's still faster to get it right the first time. The three rules:
 
 1. Every piece of text is wrapped in **double quotes**: `"like this"`.
 2. Items in a list are separated by **commas** — but the **last one has no comma**
@@ -452,7 +477,8 @@ line if something's off. This takes ten seconds and prevents the most common pro
 
 | What you see | What it means | What to do |
 |---|---|---|
-| Red X in the Actions tab | The build failed — usually a JSON punctuation error. | The live site is **unaffected** and still shows the last good version. Click the failed run and read the error, or validate your JSON at jsonlint.com. |
+| Red X on an open pull request | The build check caught a problem — usually a JSON punctuation error — **before** anything went live. | **Don't merge.** Click **Details** beside the failed check to see the error, or validate your JSON at jsonlint.com. Push a fix to the same branch and the check re-runs itself. |
+| Red X in the Actions tab after a merge | The publish step failed. | The live site is **unaffected** and still shows the last good version. Click the failed run and read the error. |
 | Change merged but site looks the same | Either the build is still running, or your browser is showing a cached copy. | Check Actions for a green check, then hard refresh (Ctrl+Shift+R / Cmd+Shift+R). |
 | A page is broken or wrong after a merge | A content mistake got through. | Open the merged pull request and click **Revert**. |
 | Images or links broken everywhere | Usually the `pathPrefix` / `url` settings. | See [If you move to a custom domain](#if-you-move-to-a-custom-domain). |
